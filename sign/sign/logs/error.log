@@ -1,0 +1,88 @@
+[05-Jun-2025 11:36:36 Europe/London] Contracts API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ps.stage' in 'field list'
+[05-Jun-2025 11:36:45 Europe/London] Terms API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'file_path' in 'field list'
+[05-Jun-2025 11:38:18 Europe/London] Contracts API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ps.stage' in 'field list'
+[05-Jun-2025 11:46:31 Europe/London] Terms API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'file_path' in 'field list'
+[05-Jun-2025 11:47:22 Europe/London] Terms API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'file_path' in 'field list'
+[05-Jun-2025 11:51:42 Europe/London] Upload API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'filename' in 'field list'
+[05-Jun-2025 11:54:43 Europe/London] Upload API Error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dbbn8ltv7kpava`.`kb_attachments`, CONSTRAINT `kb_attachments_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `kb_contracts` (`id`) ON DELETE CASCADE)
+[05-Jun-2025 11:59:55 Europe/London] Upload API Error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dbbn8ltv7kpava`.`kb_attachments`, CONSTRAINT `kb_attachments_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `kb_contracts` (`id`) ON DELETE CASCADE)
+[05-Jun-2025 12:02:44 Europe/London] Upload API Error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dbbn8ltv7kpava`.`kb_attachments`, CONSTRAINT `kb_attachments_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `kb_contracts` (`id`) ON DELETE CASCADE)
+[05-Jun-2025 12:05:44 Europe/London] Upload API Error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dbbn8ltv7kpava`.`kb_attachments`, CONSTRAINT `kb_attachments_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `kb_contracts` (`id`) ON DELETE CASCADE)
+[05-Jun-2025 12:08:37 Europe/London] Upload API Error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dbbn8ltv7kpava`.`kb_attachments`, CONSTRAINT `kb_attachments_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `kb_contracts` (`id`) ON DELETE CASCADE)
+[05-Jun-2025 12:10:58 Europe/London] Upload API Error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dbbn8ltv7kpava`.`kb_attachments`, CONSTRAINT `kb_attachments_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `kb_contracts` (`id`) ON DELETE CASCADE)
+[05-Jun-2025 12:12:16 Europe/London] Upload API Error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dbbn8ltv7kpava`.`kb_attachments`, CONSTRAINT `kb_attachments_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `kb_contracts` (`id`) ON DELETE CASCADE)
+[05-Jun-2025 12:14:35 Europe/London] Upload API Error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dbbn8ltv7kpava`.`kb_attachments`, CONSTRAINT `kb_attachments_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `kb_contracts` (`id`) ON DELETE CASCADE)
+[05-Jun-2025 12:19:26 Europe/London] Upload API Error: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'contract_id' cannot be null
+[05-Jun-2025 12:24:09 Europe/London] Contracts API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'total_amount' in 'field list'
+[05-Jun-2025 12:25:21 Europe/London] Contracts API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'total_amount' in 'field list'
+[05-Jun-2025 12:30:27 Europe/London] Contracts API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'total_amount' in 'field list'
+[05-Jun-2025 12:31:12 Europe/London] Contracts API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'total_amount' in 'field list'
+[05-Jun-2025 17:06:15 Europe/London] Contracts API GET called at 2025-06-05 17:06:15
+[05-Jun-2025 17:06:15 Europe/London] Contracts found: 2
+[05-Jun-2025 17:08:24 Europe/London] Contracts API GET called at 2025-06-05 17:08:24
+[05-Jun-2025 17:08:24 Europe/London] Contracts found: 2
+[18-Jun-2025 10:16:34 Europe/London] Email attempt to INFO@KITCHEN-BATHROOM.CO.UK: SUCCESS
+[18-Jun-2025 10:16:34 Europe/London] Send Contract Email Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_by' in 'field list'
+[18-Jun-2025 10:19:39 Europe/London] Email attempt to INFO@KITCHEN-BATHROOM.CO.UK: SUCCESS
+[18-Jun-2025 10:19:39 Europe/London] Contract email sent successfully to INFO@KITCHEN-BATHROOM.CO.UK for contract ID: 13
+[18-Jun-2025 10:26:20 Europe/London] Email attempt to INFO@KITCHEN-BATHROOM.CO.UK: SUCCESS
+[18-Jun-2025 10:26:20 Europe/London] Contract email sent successfully to INFO@KITCHEN-BATHROOM.CO.UK for contract ID: 13
+[18-Jun-2025 10:47:29 Europe/London] Email attempt to steveberriman220273@gmail.com: SUCCESS
+[18-Jun-2025 10:47:29 Europe/London] Contract email sent successfully to steveberriman220273@gmail.com for contract ID: 8
+[18-Jun-2025 10:52:59 Europe/London] Send Contract Email Error: Contract not found
+[18-Jun-2025 10:53:16 Europe/London] Send Contract Email Error: Contract not found
+[18-Jun-2025 10:53:35 Europe/London] Send Contract Email Error: Contract not found
+[18-Jun-2025 12:30:43 Europe/London] Send Contract Email Error: Contract not found
+[18-Jun-2025 12:34:21 Europe/London] Email attempt to steveberriman220273@gmail.com: SUCCESS
+[18-Jun-2025 12:34:21 Europe/London] Contract email sent successfully to steveberriman220273@gmail.com for contract ID: 8
+[18-Jun-2025 12:36:42 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 12:41:07 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 67
+[18-Jun-2025 12:41:07 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 73
+[18-Jun-2025 12:41:28 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 12:42:23 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 67
+[18-Jun-2025 12:42:23 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 73
+[18-Jun-2025 12:42:55 Europe/London] Submit Signature API Error: Signature data is required
+[18-Jun-2025 12:46:47 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 67
+[18-Jun-2025 12:46:47 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 73
+[18-Jun-2025 12:48:19 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 67
+[18-Jun-2025 12:48:19 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 73
+[18-Jun-2025 12:50:11 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 67
+[18-Jun-2025 12:50:11 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 73
+[18-Jun-2025 13:45:56 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 67
+[18-Jun-2025 13:45:56 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 73
+[18-Jun-2025 14:26:29 Europe/London] Get Contract API Error: Token is required
+[18-Jun-2025 14:27:44 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 67
+[18-Jun-2025 14:27:44 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 73
+[18-Jun-2025 14:32:16 Europe/London] Get Contract API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.lineItems' in 'field list'
+[18-Jun-2025 14:32:29 Europe/London] Get Contract API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.lineItems' in 'field list'
+[18-Jun-2025 14:32:46 Europe/London] Get Contract API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.lineItems' in 'field list'
+[18-Jun-2025 14:32:55 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 14:33:24 Europe/London] Get Contract API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.lineItems' in 'field list'
+[18-Jun-2025 14:35:24 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 62
+[18-Jun-2025 14:35:24 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 63
+[18-Jun-2025 14:35:49 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 62
+[18-Jun-2025 14:35:49 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 63
+[18-Jun-2025 14:38:31 Europe/London] PHP Warning:  Undefined array key "lineItems" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 62
+[18-Jun-2025 14:38:31 Europe/London] PHP Warning:  Undefined array key "paymentSchedule" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/get-contract.php on line 63
+[18-Jun-2025 14:49:29 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 14:58:23 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 15:01:24 Europe/London] Submit Signature API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'signature_type' in 'field list'
+[18-Jun-2025 15:01:49 Europe/London] Submit Signature API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'signature_type' in 'field list'
+[18-Jun-2025 15:04:49 Europe/London] Submit Signature API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'client_name' in 'field list'
+[18-Jun-2025 15:05:27 Europe/London] Submit Signature API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'client_name' in 'field list'
+[18-Jun-2025 15:05:36 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 15:05:50 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 15:06:28 Europe/London] Submit Signature API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'client_name' in 'field list'
+[18-Jun-2025 18:29:28 Europe/London] Submit Signature API Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'client_name' in 'field list'
+[18-Jun-2025 18:44:56 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 18:45:31 Europe/London] Terms retrieval error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'active' in 'where clause'
+[18-Jun-2025 18:57:22 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 18:57:47 Europe/London] Terms retrieval error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'active' in 'where clause'
+[18-Jun-2025 19:13:21 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 19:15:43 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 19:16:33 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 19:34:31 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 19:44:12 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 20:01:23 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 20:03:43 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149
+[18-Jun-2025 20:03:45 Europe/London] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/send-contract-email.php on line 149

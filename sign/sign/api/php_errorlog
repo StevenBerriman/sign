@@ -1,0 +1,11 @@
+[04-Jun-2025 22:18:18 UTC] PHP Parse error:  syntax error, unexpected token "?", expecting end of file in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/bd-test.php on line 15
+[04-Jun-2025 22:18:58 UTC] PHP Parse error:  syntax error, unexpected token "?", expecting end of file in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/db-test.php on line 15
+[04-Jun-2025 22:19:02 UTC] PHP Parse error:  syntax error, unexpected token "?", expecting end of file in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/db-test.php on line 15
+[04-Jun-2025 22:19:08 UTC] PHP Parse error:  syntax error, unexpected token "?", expecting end of file in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/db-test.php on line 15
+[04-Jun-2025 22:19:36 UTC] PHP Parse error:  syntax error, unexpected token "?", expecting end of file in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/db-test.php on line 15
+[05-Jun-2025 16:33:18 UTC] PHP Parse error:  syntax error, unexpected single-quoted string "totalAmount", expecting "]" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/contracts.php on line 79
+[05-Jun-2025 16:33:25 UTC] PHP Parse error:  syntax error, unexpected single-quoted string "totalAmount", expecting "]" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/contracts.php on line 79
+[05-Jun-2025 16:34:27 UTC] PHP Parse error:  syntax error, unexpected single-quoted string "totalAmount", expecting "]" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/contracts.php on line 79
+[05-Jun-2025 16:34:43 UTC] PHP Parse error:  syntax error, unexpected single-quoted string "totalAmount", expecting "]" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/contracts.php on line 79
+[05-Jun-2025 16:35:32 UTC] PHP Parse error:  syntax error, unexpected single-quoted string "totalAmount", expecting "]" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/contracts.php on line 79
+[05-Jun-2025 16:35:37 UTC] PHP Parse error:  syntax error, unexpected single-quoted string "totalAmount", expecting "]" in /home/customer/www/kitchen-bathroom.co.uk/public_html/sign/api/contracts.php on line 79

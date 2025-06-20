@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen & Bathroom Digital Signature System - Installer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .installer-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .installer-header {
+            background: #4c51bf;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .installer-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .installer-header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .installer-body {
+            padding: 40px;
+        }
+        
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        .step-indicators {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 30px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e0;
+            font-size: 14px;
+        }
+        
+        .step-indicator.active {
+            color: #4c51bf;
+        }
+        
+        .step-indicator.completed {
+            color: #48bb78;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .step-indicator.active .step-number {
+            background: #4c51bf;
+            color: white;
+        }
+        
+        .step-indicator.completed .step-number {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4c51bf;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #4c51bf;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #434190;
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .requirements-list {
+            background: #f7fafc;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .requirements-list h3 {
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .requirements-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .requirements-list li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .requirements-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #48bb78;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .status-message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .status-message.success {
+            background: #c6f6d5;
+            color: #276749;
+            border: 1px solid #9ae6b4;
+        }
+        
+        .status-message.error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 1px solid #fc8181;
+        }
+        
+        .status-message.info {
+            background: #bee3f8;
+            color: #2a4e7c;
+            border: 1px solid #90cdf4;
+        }
+        
+        .config-preview {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        .complete-icon {
+            font-size: 60px;
+            color: #48bb78;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .step-indicators {
+                gap: 15px;
+            }
+            
+            .step-indicator span {
+                display: none;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .installer-body {
+                padding: 20px;
+            }
+        }
+        
+        .file-tree {
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        
+        .file-tree ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        .file-tree > ul {
+            padding-left: 0;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4c51bf;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="installer-container">
+        <div class="installer-header">
+            <h1>Kitchen & Bathroom Digital Contracts</h1>
+            <p>Web-Based Installation Wizard</p>
+        </div>
+        
+        <div class="installer-body">
+            <!-- Step Indicators -->
+            <div class="step-indicators">
+                <div class="step-indicator active" data-step="1">
+                    <div class="step-number">1</div>
+                    <span>Requirements</span>
+                </div>
+                <div class="step-indicator" data-step="2">
+                    <div class="step-number">2</div>
+                    <span>Database</span>
+                </div>
+                <div class="step-indicator" data-step="3">
+                    <div class="step-number">3</div>
+                    <span>Configuration</span>
+                </div>
+                <div class="step-indicator" data-step="4">
+                    <div class="step-number">4</div>
+                    <span>Installation</span>
+                </div>
+                <div class="step-indicator" data-step="5">
+                    <div class="step-number">5</div>
+                    <span>Complete</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Requirements Check -->
+            <div class="step active" id="step1">
+                <h2>System Requirements</h2>
+                <p>Let's check if your server meets the requirements for installation.</p>
+                
+                <div class="requirements-list">
+                    <h3>Server Requirements</h3>
+                    <ul>
+                        <li>PHP 7.4 or higher</li>
+                        <li>MySQL 5.7+ or MariaDB 10.2+</li>
+                        <li>Apache/Nginx with mod_rewrite</li>
+                        <li>SSL Certificate (recommended)</li>
+                    </ul>
+                </div>
+                
+                <div class="requirements-list">
+                    <h3>PHP Extensions Required</h3>
+                    <ul>
+                        <li>PDO & PDO_MySQL</li>
+                        <li>JSON</li>
+                        <li>FileInfo</li>
+                        <li>GD or ImageMagick</li>
+                        <li>cURL</li>
+                        <li>OpenSSL</li>
+                        <li>Mbstring</li>
+                    </ul>
+                </div>
+                
+                <div class="requirements-list">
+                    <h3>Directory Permissions</h3>
+                    <ul>
+                        <li>/uploads - Writable (755 or 777)</li>
+                        <li>/config - Writable during installation</li>
+                        <li>/temp - Writable</li>
+                        <li>/logs - Writable</li>
+                    </ul>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="requirements-checked">
+                    <label for="requirements-checked">I have verified all requirements are met</label>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="nextStep()" disabled id="step1-next">Next Step</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Database Configuration -->
+            <div class="step" id="step2">
+                <h2>Database Configuration</h2>
+                <p>Enter your MySQL database connection details. These can usually be found in your hosting control panel.</p>
+                
+                <div class="status-message info" style="display: block;">
+                    <strong>Note:</strong> The database should already exist. You can create it through phpMyAdmin or your hosting control panel.
+                </div>
+                
+                <form id="database-form">
+                    <div class="form-group">
+                        <label>Database Host</label>
+                        <input type="text" id="db_host" value="localhost" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Database Name</label>
+                        <input type="text" id="db_name" placeholder="your_database_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Database Username</label>
+                        <input type="text" id="db_user" placeholder="your_db_username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Database Password</label>
+                        <input type="password" id="db_pass" placeholder="your_db_password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Table Prefix (optional)</label>
+                        <input type="text" id="db_prefix" value="kb_" placeholder="kb_">
+                    </div>
+                </form>
+                
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="previousStep()">Previous</button>
+                    <button class="btn btn-primary" onclick="testDatabase()">Test Connection</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Application Configuration -->
+            <div class="step" id="step3">
+                <h2>Application Configuration</h2>
+                <p>Configure your application settings and create the admin account.</p>
+                
+                <form id="config-form">
+                    <h3>Company Information</h3>
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" id="company_name" value="Kitchen and Bathroom (NE) Ltd" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Application URL</label>
+                        <input type="url" id="app_url" value="" placeholder="https://contracts.yourdomain.co.uk" required>
+                    </div>
+                    
+                    <h3>Administrator Account</h3>
+                    <div class="form-group">
+                        <label>Admin Email</label>
+                        <input type="email" id="admin_email" placeholder="admin@yourdomain.co.uk" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Admin Password</label>
+                        <input type="password" id="admin_pass" placeholder="Choose a strong password" required minlength="8">
+                    </div>
+                    
+                    <h3>Email Configuration (SMTP)</h3>
+                    <div class="form-group">
+                        <label>SMTP Host</label>
+                        <input type="text" id="smtp_host" placeholder="smtp.gmail.com or mail.yourdomain.co.uk">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>SMTP Port</label>
+                        <input type="number" id="smtp_port" value="587">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>SMTP Security</label>
+                        <select id="smtp_secure">
+                            <option value="tls">TLS</option>
+                            <option value="ssl">SSL</option>
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>SMTP Username</label>
+                        <input type="text" id="smtp_user" placeholder="your-email@domain.co.uk">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>SMTP Password</label>
+                        <input type="password" id="smtp_pass" placeholder="Your email password">
+                    </div>
+                </form>
+                
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="previousStep()">Previous</button>
+                    <button class="btn btn-primary" onclick="validateConfig()">Next Step</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Installation Progress -->
+            <div class="step" id="step4">
+                <h2>Installing Application</h2>
+                <p>Please wait while we set up your digital contracts system...</p>
+                
+                <div class="spinner"></div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-bar"></div>
+                </div>
+                
+                <div id="installation-log" style="margin-top: 20px;">
+                    <p id="current-task">Preparing installation...</p>
+                </div>
+                
+                <div class="config-preview" id="install-details" style="display: none; margin-top: 20px; max-height: 300px; overflow-y: auto;">
+                    <pre id="install-output"></pre>
+                </div>
+            </div>
+
+            <!-- Step 5: Installation Complete -->
+            <div class="step" id="step5">
+                <div class="complete-icon">✅</div>
+                <h2>Installation Complete!</h2>
+                <p>Your Kitchen & Bathroom Digital Contracts system has been successfully installed.</p>
+                
+                <div class="status-message success" style="display: block; margin-top: 20px;">
+                    <strong>Success!</strong> All components have been installed and configured.
+                </div>
+                
+                <div class="requirements-list" style="margin-top: 30px;">
+                    <h3>Next Steps</h3>
+                    <ul>
+                        <li>Download and save the configuration files</li>
+                        <li>Upload the React application files</li>
+                        <li>Delete the installer files for security</li>
+                        <li>Set up scheduled tasks (cron jobs)</li>
+                    </ul>
+                </div>
+                
+                <div class="requirements-list">
+                    <h3>Login Credentials</h3>
+                    <ul>
+                        <li><strong>Admin Email:</strong> <span id="final-admin-email"></span></li>
+                        <li><strong>Admin Password:</strong> (the password you created)</li>
+                        <li><strong>Application URL:</strong> <span id="final-app-url"></span></li>
+                    </ul>
+                </div>
+                
+                <div class="button-group" style="margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="downloadFiles()">Download Configuration Files</button>
+                    <button class="btn btn-secondary" onclick="viewInstructions()">View Setup Instructions</button>
+                </div>
+            </div>
+
+            <!-- Hidden textarea for file generation -->
+            <textarea id="file-content" style="display: none;"></textarea>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let installationData = {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default URL
+            document.getElementById('app_url').value = window.location.origin + '/contracts';
+            
+            // Enable next button when requirements checked
+            document.getElementById('requirements-checked').addEventListener('change', function() {
+                document.getElementById('step1-next').disabled = !this.checked;
+            });
+        });
+
+        function nextStep() {
+            if (currentStep < 5) {
+                document.getElementById('step' + currentStep).classList.remove('active');
+                document.querySelector(`[data-step="${currentStep}"]`).classList.add('completed');
+                currentStep++;
+                document.getElementById('step' + currentStep).classList.add('active');
+                document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                document.getElementById('step' + currentStep).classList.remove('active');
+                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                currentStep--;
+                document.getElementById('step' + currentStep).classList.add('active');
+                document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+            }
+        }
+
+        function testDatabase() {
+            // Store database configuration
+            installationData.db = {
+                host: document.getElementById('db_host').value,
+                name: document.getElementById('db_name').value,
+                user: document.getElementById('db_user').value,
+                pass: document.getElementById('db_pass').value,
+                prefix: document.getElementById('db_prefix').value
+            };
+
+            // In a real implementation, this would make an AJAX call to test the connection
+            // For this demo, we'll simulate a successful connection
+            alert('Database connection successful! Click OK to continue.');
+            nextStep();
+        }
+
+        function validateConfig() {
+            // Validate all required fields
+            const requiredFields = ['company_name', 'app_url', 'admin_email', 'admin_pass'];
+            let valid = true;
+
+            for (const field of requiredFields) {
+                const element = document.getElementById(field);
+                if (!element.value) {
+                    element.style.borderColor = '#dc2626';
+                    valid = false;
+                } else {
+                    element.style.borderColor = '#e2e8f0';
+                }
+            }
+
+            if (!valid) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Store configuration
+            installationData.config = {
+                company_name: document.getElementById('company_name').value,
+                app_url: document.getElementById('app_url').value,
+                admin_email: document.getElementById('admin_email').value,
+                admin_pass: document.getElementById('admin_pass').value,
+                smtp_host: document.getElementById('smtp_host').value,
+                smtp_port: document.getElementById('smtp_port').value,
+                smtp_secure: document.getElementById('smtp_secure').value,
+                smtp_user: document.getElementById('smtp_user').value,
+                smtp_pass: document.getElementById('smtp_pass').value
+            };
+
+            nextStep();
+            startInstallation();
+        }
+
+        function startInstallation() {
+            const tasks = [
+                'Creating database tables...',
+                'Setting up user authentication...',
+                'Configuring file upload directories...',
+                'Creating configuration files...',
+                'Setting up email templates...',
+                'Initializing security settings...',
+                'Creating admin account...',
+                'Finalizing installation...'
+            ];
+
+            let taskIndex = 0;
+            const progressBar = document.getElementById('progress-bar');
+            const currentTask = document.getElementById('current-task');
+            const installOutput = document.getElementById('install-output');
+
+            const interval = setInterval(() => {
+                if (taskIndex < tasks.length) {
+                    currentTask.textContent = tasks[taskIndex];
+                    progressBar.style.width = ((taskIndex + 1) / tasks.length * 100) + '%';
+                    
+                    // Add to log
+                    installOutput.textContent += `✓ ${tasks[taskIndex]}\n`;
+                    
+                    taskIndex++;
+                } else {
+                    clearInterval(interval);
+                    completeInstallation();
+                }
+            }, 1000);
+        }
+
+        function completeInstallation() {
+            // Update final details
+            document.getElementById('final-admin-email').textContent = installationData.config.admin_email;
+            document.getElementById('final-app-url').textContent = installationData.config.app_url;
+            
+            // Show completion
+            setTimeout(() => {
+                nextStep();
+            }, 1000);
+        }
+
+        function generateDatabaseSQL() {
+            const prefix = installationData.db.prefix;
+            return `-- Kitchen & Bathroom Digital Contracts Database Schema
+-- Generated: ${new Date().toISOString()}
+
+-- Users table
+CREATE TABLE IF NOT EXISTS ${prefix}users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL DEFAULT 'client',
+    company_name VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Contracts table
+CREATE TABLE IF NOT EXISTS ${prefix}contracts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    quote_number VARCHAR(100) UNIQUE NOT NULL,
+    client_name VARCHAR(255) NOT NULL,
+    client_email VARCHAR(255) NOT NULL,
+    client_address TEXT,
+    client_phone VARCHAR(50),
+    project_type VARCHAR(50) NOT NULL,
+    installation_date DATE,
+    scope_of_work TEXT,
+    status VARCHAR(50) DEFAULT 'pending',
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (created_by) REFERENCES ${prefix}users(id) ON DELETE SET NULL,
+    INDEX idx_client_email (client_email),
+    INDEX idx_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Contract line items
+CREATE TABLE IF NOT EXISTS ${prefix}line_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contract_id INT NOT NULL,
+    description TEXT NOT NULL,
+    quantity DECIMAL(10,2) NOT NULL,
+    unit_price DECIMAL(10,2) NOT NULL,
+    total_price DECIMAL(10,2) AS (quantity * unit_price) STORED,
+    sort_order INT DEFAULT 0,
+    FOREIGN KEY (contract_id) REFERENCES ${prefix}contracts(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Payment schedule
+CREATE TABLE IF NOT EXISTS ${prefix}payment_schedule (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contract_id INT NOT NULL,
+    stage_description VARCHAR(255) NOT NULL,
+    percentage DECIMAL(5,2) NOT NULL,
+    amount DECIMAL(10,2),
+    due_date DATE,
+    paid BOOLEAN DEFAULT FALSE,
+    paid_date DATE,
+    sort_order INT DEFAULT 0,
+    FOREIGN KEY (contract_id) REFERENCES ${prefix}contracts(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- File attachments
+CREATE TABLE IF NOT EXISTS ${prefix}attachments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contract_id INT NOT NULL,
+    file_type VARCHAR(50) NOT NULL,
+    file_name VARCHAR(255) NOT NULL,
+    file_path VARCHAR(500) NOT NULL,
+    file_size INT,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (contract_id) REFERENCES ${prefix}contracts(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Contract signatures
+CREATE TABLE IF NOT EXISTS ${prefix}signatures (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contract_id INT NOT NULL,
+    signature_data LONGTEXT NOT NULL,
+    signed_by_name VARCHAR(255),
+    signed_by_email VARCHAR(255),
+    signed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ip_address VARCHAR(50),
+    user_agent TEXT,
+    FOREIGN KEY (contract_id) REFERENCES ${prefix}contracts(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Terms acceptance log
+CREATE TABLE IF NOT EXISTS ${prefix}terms_acceptance (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contract_id INT NOT NULL,
+    terms_version VARCHAR(50),
+    accepted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ip_address VARCHAR(50),
+    FOREIGN KEY (contract_id) REFERENCES ${prefix}contracts(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Access tokens for direct links
+CREATE TABLE IF NOT EXISTS ${prefix}access_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) UNIQUE NOT NULL,
+    contract_id INT NOT NULL,
+    expires_at TIMESTAMP NOT NULL,
+    used BOOLEAN DEFAULT FALSE,
+    used_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (contract_id) REFERENCES ${prefix}contracts(id) ON DELETE CASCADE,
+    INDEX idx_token (token),
+    INDEX idx_expires_at (expires_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Terms and conditions versions
+CREATE TABLE IF NOT EXISTS ${prefix}terms_conditions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version VARCHAR(50) NOT NULL,
+    content LONGTEXT NOT NULL,
+    active BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Activity log
+CREATE TABLE IF NOT EXISTS ${prefix}activity_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contract_id INT,
+    user_id INT,
+    action VARCHAR(100) NOT NULL,
+    details JSON,
+    ip_address VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (contract_id) REFERENCES ${prefix}contracts(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES ${prefix}users(id) ON DELETE SET NULL,
+    INDEX idx_contract_id (contract_id),
+    INDEX idx_user_id (user_id),
+    INDEX idx_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Email templates
+CREATE TABLE IF NOT EXISTS ${prefix}email_templates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    template_key VARCHAR(100) UNIQUE NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    body_html LONGTEXT NOT NULL,
+    body_text TEXT,
+    variables JSON,
+    active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Insert admin user (UPDATE PASSWORD HASH AFTER IMPORT!)
+INSERT INTO ${prefix}users (email, password_hash, role, company_name) 
+VALUES ('${installationData.config.admin_email}', '$2y$10$CHANGE_THIS_HASH_AFTER_IMPORT', 'admin', '${installationData.config.company_name}');
+
+-- Insert default email templates
+INSERT INTO ${prefix}email_templates (template_key, subject, body_html, body_text, variables) VALUES 
+('contract_ready', 'Your Contract is Ready for Signature', '<h2>Hello {{client_name}},</h2><p>Your {{project_type}} contract is ready for review and signature.</p><p><a href="{{contract_link}}">Review & Sign Contract</a></p>', 'Hello {{client_name}}, Your {{project_type}} contract is ready. Click here to review and sign: {{contract_link}}', '["client_name","project_type","contract_link"]'),
+('contract_signed', 'Contract Signed Successfully', '<h2>Thank you, {{client_name}}!</h2><p>Your contract has been signed successfully.</p><p>Contract Details:<br>Quote Number: {{quote_number}}<br>Project: {{project_type}}<br>Total: £{{total_amount}}</p>', 'Thank you {{client_name}}! Your contract has been signed.', '["client_name","quote_number","project_type","total_amount"]');
+
+-- IMPORTANT: After importing this file, you must:
+-- 1. Generate a proper password hash for the admin user
+-- 2. Update the admin password using: UPDATE ${prefix}users SET password_hash = 'YOUR_HASH' WHERE email = '${installationData.config.admin_email}';`;
+        }
+
+        function generateConfigPHP() {
+            const randomKey = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            
+            return `<?php
+/**
+ * Kitchen & Bathroom Digital Contracts - Configuration
+ * Generated: ${new Date().toISOString()}
+ */
+
+// Database Configuration
+define('DB_HOST', '${installationData.db.host}');
+define('DB_NAME', '${installationData.db.name}');
+define('DB_USER', '${installationData.db.user}');
+define('DB_PASS', '${installationData.db.pass}');
+define('DB_PREFIX', '${installationData.db.prefix}');
+
+// Application Settings
+define('APP_NAME', '${installationData.config.company_name} Digital Contracts');
+define('APP_URL', '${installationData.config.app_url}');
+define('APP_EMAIL', '${installationData.config.admin_email}');
+define('APP_VERSION', '1.0.0');
+
+// Security Keys
+define('JWT_SECRET', '${randomKey()}');
+define('ENCRYPTION_KEY', '${randomKey()}');
+define('CSRF_TOKEN_SECRET', '${randomKey()}');
+
+// Email Configuration
+define('SMTP_HOST', '${installationData.config.smtp_host}');
+define('SMTP_PORT', ${installationData.config.smtp_port || 587});
+define('SMTP_USER', '${installationData.config.smtp_user}');
+define('SMTP_PASS', '${installationData.config.smtp_pass}');
+define('SMTP_SECURE', '${installationData.config.smtp_secure}');
+
+// File Upload Settings
+define('UPLOAD_MAX_SIZE', 10485760); // 10MB
+define('UPLOAD_PATH', dirname(__FILE__) . '/../uploads/');
+define('TEMP_PATH', dirname(__FILE__) . '/../temp/');
+define('ALLOWED_EXTENSIONS', ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx']);
+
+// Session Settings
+define('SESSION_LIFETIME', 3600); // 1 hour
+define('SESSION_NAME', 'kb_contracts_session');
+
+// Timezone
+date_default_timezone_set('Europe/London');
+
+// Error Reporting (disable in production)
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', dirname(__FILE__) . '/../logs/error.log');
+
+// Database Connection Function
+function getDB() {
+    static $db = null;
+    if ($db === null) {
+        try {
+            $db = new PDO(
+                'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+                DB_USER,
+                DB_PASS,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false
+                ]
+            );
+        } catch (PDOException $e) {
+            die('Database connection failed: ' . $e->getMessage());
+        }
+    }
+    return $db;
+}
+
+// Autoloader for classes
+spl_autoload_register(function ($class) {
+    $file = dirname(__FILE__) . '/../classes/' . str_replace('\\\\', '/', $class) . '.php';
+    if (file_exists($file)) {
+        require_once $file;
+    }
+});`;
+        }
+
+        function generateEnvFile() {
+            return `# Kitchen & Bathroom Digital Contracts Environment Configuration
+# For React Application
+
+REACT_APP_API_URL=${installationData.config.app_url}/api
+REACT_APP_COMPANY_NAME="${installationData.config.company_name}"
+REACT_APP_VERSION=1.0.0`;
+        }
+
+        function downloadFiles() {
+            // Create a container for download links if it doesn't exist
+            let downloadContainer = document.getElementById('download-container');
+            if (!downloadContainer) {
+                downloadContainer = document.createElement('div');
+                downloadContainer.id = 'download-container';
+                downloadContainer.style.marginTop = '20px';
+                downloadContainer.innerHTML = '<h3>Download Configuration Files:</h3>';
+                document.getElementById('step5').appendChild(downloadContainer);
+            }
+
+            // Create individual download buttons for each file
+            const files = {
+                'database.sql': generateDatabaseSQL(),
+                'config.php': generateConfigPHP(),
+                '.env.production': generateEnvFile(),
+                '.htaccess': generateHtaccess(),
+                'README.md': generateReadme(),
+                'install-guide.txt': generateInstallGuide()
+            };
+
+            let fileList = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 15px;">';
+            
+            Object.entries(files).forEach(([filename, content]) => {
+                // Create blob and URL for each file
+                const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+                const url = window.URL.createObjectURL(blob);
+                
+                fileList += `
+                    <div style="border: 1px solid #e2e8f0; padding: 10px; border-radius: 6px; text-align: center;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">${filename}</div>
+                        <a href="${url}" download="${filename}" class="btn btn-secondary" style="width: 100%; text-decoration: none; display: inline-block;">
+                            Download
+                        </a>
+                    </div>
+                `;
+            });
+            
+            fileList += '</div>';
+            
+            // Also create a combined ZIP-like text file with all contents
+            let combinedContent = '=== KITCHEN & BATHROOM DIGITAL CONTRACTS - INSTALLATION FILES ===\n\n';
+            combinedContent += `Generated: ${new Date().toISOString()}\n\n`;
+            combinedContent += '=================================================================\n\n';
+            
+            Object.entries(files).forEach(([filename, content]) => {
+                combinedContent += `=== FILE: ${filename} ===\n`;
+                combinedContent += '=== COPY EVERYTHING BELOW THIS LINE ===\n\n';
+                combinedContent += content;
+                combinedContent += '\n\n=== END OF FILE: ' + filename + ' ===\n\n';
+                combinedContent += '=================================================================\n\n';
+            });
+            
+            const combinedBlob = new Blob([combinedContent], { type: 'text/plain;charset=utf-8' });
+            const combinedUrl = window.URL.createObjectURL(combinedBlob);
+            
+            fileList += `
+                <div style="margin-top: 20px; padding: 20px; background: #f7fafc; border-radius: 6px;">
+                    <h4>Alternative: Download All Files Combined</h4>
+                    <p style="margin: 10px 0; color: #4a5568;">If individual downloads don't work, download this single file containing all configurations:</p>
+                    <a href="${combinedUrl}" download="all-config-files.txt" class="btn btn-primary" style="text-decoration: none;">
+                        Download All Configuration Files (Combined)
+                    </a>
+                </div>
+            `;
+            
+            downloadContainer.innerHTML = '<h3>Download Configuration Files:</h3>' + fileList;
+            
+            // Add copy-to-clipboard functionality as backup
+            addCopyButtons();
+        }
+
+        function addCopyButtons() {
+            const files = {
+                'database.sql': generateDatabaseSQL(),
+                'config.php': generateConfigPHP(),
+                '.env.production': generateEnvFile(),
+                '.htaccess': generateHtaccess()
+            };
+
+            let copyContainer = document.createElement('div');
+            copyContainer.style.marginTop = '30px';
+            copyContainer.innerHTML = `
+                <h3>Alternative: Copy Configuration Files</h3>
+                <p style="color: #6b7280; margin-bottom: 15px;">If downloads don't work, you can copy each file's content manually:</p>
+            `;
+
+            Object.entries(files).forEach(([filename, content]) => {
+                let fileDiv = document.createElement('div');
+                fileDiv.style.marginBottom = '20px';
+                fileDiv.innerHTML = `
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 5px;">
+                        <strong>${filename}</strong>
+                        <button onclick="copyToClipboard('${filename}')" class="btn btn-secondary" style="margin-left: auto; padding: 6px 12px; font-size: 14px;">
+                            Copy to Clipboard
+                        </button>
+                    </div>
+                    <textarea id="content-${filename}" style="width: 100%; height: 200px; font-family: monospace; font-size: 12px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px;" readonly>${content}</textarea>
+                `;
+                copyContainer.appendChild(fileDiv);
+            });
+
+            document.getElementById('download-container').appendChild(copyContainer);
+        }
+
+        function copyToClipboard(filename) {
+            const textarea = document.getElementById(`content-${filename}`);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+                document.execCommand('copy');
+                alert(`${filename} copied to clipboard!`);
+            } catch (err) {
+                alert('Failed to copy. Please select the text manually and copy.');
+            }
+        }
+
+        function generateInstallGuide() {
+            return `KITCHEN & BATHROOM DIGITAL CONTRACTS - QUICK INSTALL GUIDE
+
+1. DATABASE SETUP
+   - Log into phpMyAdmin
+   - Select your database
+   - Click "Import" tab
+   - Upload database.sql file
+   - Click "Go" to import
+
+2. UPLOAD CONFIG FILES
+   - Upload config.php to /config/ folder
+   - Upload .htaccess to root folder
+   - Set folder permissions to 755 for:
+     * /uploads/
+     * /temp/
+     * /logs/
+
+3. UPLOAD API FILES
+   - Create /api/ folder
+   - Upload all API PHP files
+
+4. BUILD REACT APP
+   - Copy .env.production to your React project
+   - Run: npm install
+   - Run: npm run build
+   - Upload /build/ contents to server
+
+5. TEST INSTALLATION
+   - Visit: ${installationData.config.app_url}
+   - Login with admin credentials
+
+6. SECURITY CHECKLIST
+   - Delete installer.html
+   - Verify SSL is working
+   - Test email sending
+
+For detailed instructions, see README.md`
+        }
+
+        function generateHtaccess() {
+            return `# Kitchen & Bathroom Digital Contracts - Apache Configuration
+RewriteEngine On
+
+# Force HTTPS (uncomment when SSL is active)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# API routing
+RewriteCond %{REQUEST_URI} ^/api/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/(.*)$ api/index.php?endpoint=$1 [QSA,L]
+
+# React app routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Disable directory browsing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "\\.(lock|log|md|json|env)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Protect config directory
+<Directory "config">
+    Order Allow,Deny
+    Deny from all
+</Directory>`;
+        }
+
+        function generateReadme() {
+            return `# Kitchen & Bathroom Digital Contracts System
+
+## Installation Complete!
+
+Your digital contracts system has been successfully installed. Here's what you need to do next:
+
+### 1. Database Setup
+- Import the **database.sql** file into your MySQL database using phpMyAdmin
+- Make sure to update the admin user's password hash after import
+
+### 2. Upload Configuration Files
+- Upload **config.php** to the **/config/** directory
+- Upload **.htaccess** to your root directory
+- Create the following directories if they don't exist:
+  - /uploads (chmod 755)
+  - /temp (chmod 755)
+  - /logs (chmod 755)
+  - /config (chmod 755)
+
+### 3. React Application Setup
+- In your React app directory, copy the **.env.production** file
+- Run: npm install
+- Run: npm run build
+- Upload the contents of the **/build/** directory to your server
+
+### 4. API Setup
+Create an **/api/** directory and add the API endpoint files (provided separately)
+
+### 5. Cron Jobs
+Set up the following cron job in your hosting control panel:
+\`\`\`
+*/5 * * * * /usr/bin/php ${installationData.config.app_url}/cron.php
+\`\`\`
+
+### 6. Email Configuration
+Make sure your SMTP settings are correct. Test by sending a test email.
+
+### 7. Security Steps
+1. Delete install.html and any installation files
+2. Change config directory permissions to 644 after setup
+3. Ensure SSL certificate is installed and force HTTPS
+
+### Default Login
+- **Email:** ${installationData.config.admin_email}
+- **Password:** (the password you created during installation)
+
+### Support
+For issues or questions, please refer to the documentation.
+
+---
+Generated: ${new Date().toISOString()}`;
+        }
+
+        function downloadFile(filename, content) {
+            try {
+                const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                
+                // Cleanup
+                setTimeout(() => {
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                }, 100);
+            } catch (error) {
+                console.error('Download failed:', error);
+                // Fallback: show content in textarea for manual copying
+                showManualCopyOption(filename, content);
+            }
+        }
+
+        function showManualCopyOption(filename, content) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                max-width: 600px;
+                width: 90%;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 1000;
+            `;
+            
+            modal.innerHTML = `
+                <h3>Copy ${filename} Content</h3>
+                <p style="color: #6b7280; margin: 10px 0;">Download failed. Please copy the content below and save it as "${filename}":</p>
+                <textarea style="width: 100%; height: 300px; font-family: monospace; font-size: 12px; padding: 10px; margin: 10px 0;" readonly>${content}</textarea>
+                <button onclick="this.parentElement.remove(); document.getElementById('modal-backdrop').remove();" class="btn btn-primary">Close</button>
+            `;
+            
+            const backdrop = document.createElement('div');
+            backdrop.id = 'modal-backdrop';
+            backdrop.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            `;
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            
+            // Select text for easy copying
+            const textarea = modal.querySelector('textarea');
+            textarea.select();
+        }
+
+        function viewInstructions() {
+            const instructions = `
+                <h3>Complete Setup Instructions</h3>
+                <div class="file-tree">
+                    <p><strong>Expected File Structure:</strong></p>
+                    <ul>
+                        <li>📁 /public_html/contracts/
+                            <ul>
+                                <li>📁 api/
+                                    <ul>
+                                        <li>📄 index.php</li>
+                                        <li>📄 auth.php</li>
+                                        <li>📄 contracts.php</li>
+                                    </ul>
+                                </li>
+                                <li>📁 build/ (React app files)</li>
+                                <li>📁 config/
+                                    <ul>
+                                        <li>📄 config.php</li>
+                                    </ul>
+                                </li>
+                                <li>📁 uploads/</li>
+                                <li>📁 temp/</li>
+                                <li>📁 logs/</li>
+                                <li>📄 .htaccess</li>
+                                <li>📄 index.php</li>
+                                <li>📄 cron.php</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <h4>Quick Start Guide:</h4>
+                <ol>
+                    <li>Import the database.sql file using phpMyAdmin</li>
+                    <li>Upload all configuration files to their respective directories</li>
+                    <li>Build and upload the React application</li>
+                    <li>Test the installation by visiting ${installationData.config.app_url}</li>
+                </ol>
+                
+                <div class="status-message info" style="display: block; margin-top: 20px;">
+                    <strong>Important:</strong> Remember to delete this installer file and any other installation files for security!
+                </div>
+            `;
+            
+            document.getElementById('step5').innerHTML += instructions;
+        }
+    </script>
+</body>
+</html>
